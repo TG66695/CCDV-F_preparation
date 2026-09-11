@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CCDV-F Practice Exam</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="exam-card">
+    <header class="exam-header">
+      <h1>CCDV-F Practice Exam</h1>
+      <div class="header-right">
+        <div id="timer" class="timer hidden"></div>
+        <div id="progress" class="progress"></div>
+      </div>
+    </header>
+
+    <section id="start-screen" class="screen">
+      <p>You are about to start the CCDV-F practice exam: 53 questions, 120 minutes. Answer each question by selecting one of the four options.</p>
+      <button id="start-btn" class="primary-btn">Start Exam</button>
+    </section>
+
+    <section id="quiz-screen" class="screen hidden">
+      <h2 id="question-text"></h2>
+      <div id="options" class="options"></div>
+      <div class="nav-row">
+        <span id="feedback" class="feedback"></span>
+        <button id="next-btn" class="primary-btn" disabled>Next</button>
+      </div>
+    </section>
+
+    <section id="result-screen" class="screen hidden">
+      <h2 id="result-title">Exam Complete</h2>
+      <p id="score-text" class="score-text"></p>
+      <p id="pass-fail" class="pass-fail"></p>
+      <div id="review-list" class="review-list"></div>
+      <button id="restart-btn" class="primary-btn">Restart Exam</button>
+    </section>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
