@@ -158,6 +158,33 @@ body {
   cursor: not-allowed;
 }
 
+.start-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.secondary-btn {
+  background: #fff;
+  color: var(--primary);
+  border: 1px solid var(--primary);
+  border-radius: 8px;
+  padding: 10px 20px;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.secondary-btn:hover:not(:disabled) {
+  background: #eff4ff;
+}
+
+.generate-status {
+  font-size: 13px;
+  color: var(--muted);
+}
+
 .score-text {
   font-size: 18px;
 }

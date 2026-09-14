@@ -18,6 +18,10 @@
 
     <section id="start-screen" class="screen">
       <p>You are about to start the CCDV-F practice exam: 53 questions, 120 minutes. Answer each question by selecting one of the four options.</p>
+      <div class="start-actions">
+        <button id="generate-btn" class="secondary-btn">Generate Questions</button>
+        <span id="generate-status" class="generate-status"></span>
+      </div>
       <button id="start-btn" class="primary-btn">Start Exam</button>
     </section>
 
@@ -39,6 +43,7 @@
     </section>
   </div>
 
+  <script src="questions-data.js"></script>
   <script src="app.js"></script>
 </body>
 </html>

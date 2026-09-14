@@ -1,6 +1,8 @@
 const EXAM_DURATION_SECONDS = 120 * 60;
 const LOW_TIME_WARNING_SECONDS = 5 * 60;
 const PASS_RATIO = 0.72;
+const EXAM_QUESTION_COUNT = 53;
+const GENERATED_QUESTIONS_KEY = "generatedQuestions";
 
 const startScreen = document.getElementById("start-screen");
 const quizScreen = document.getElementById("quiz-screen");
@@ -9,6 +11,8 @@ const resultScreen = document.getElementById("result-screen");
 const startBtn = document.getElementById("start-btn");
 const nextBtn = document.getElementById("next-btn");
 const restartBtn = document.getElementById("restart-btn");
+const generateBtn = document.getElementById("generate-btn");
+const generateStatusEl = document.getElementById("generate-status");
 
 const timerEl = document.getElementById("timer");
 const progressEl = document.getElementById("progress");
@@ -26,8 +30,43 @@ let userAnswers = [];
 let remainingSeconds = EXAM_DURATION_SECONDS;
 let timerInterval = null;
 let examFinished = false;
+let examInProgress = false;
+
+function shuffle(array) {
+  const result = array.slice();
+  for (let i = result.length - 1; i > 0; i -= 1) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [result[i], result[j]] = [result[j], result[i]];
+  }
+  return result;
+}
+
+/** Mirrors GenerateQuestions.kt: shuffles question and option order client-side. */
+function generateQuestionSet() {
+  const count = Math.min(EXAM_QUESTION_COUNT, questionBank.length);
+  return shuffle(questionBank)
+    .slice(0, count)
+    .map((question) => {
+      const options = shuffle([question.correctOption, ...question.incorrectOptions]);
+      const correctIndex = options.indexOf(question.correctOption);
+      return { question: question.text, options, correctIndex };
+    });
+}
+
+function generateQuestions() {
+  if (examInProgress) {
+    return;
+  }
+  const generated = generateQuestionSet();
+  localStorage.setItem(GENERATED_QUESTIONS_KEY, JSON.stringify(generated));
+  generateStatusEl.textContent = `Generated ${generated.length} questions.`;
+}
 
 async function loadQuestions() {
+  const stored = localStorage.getItem(GENERATED_QUESTIONS_KEY);
+  if (stored) {
+    return JSON.parse(stored);
+  }
   const response = await fetch("questions.json", { cache: "no-store" });
   if (!response.ok) {
     throw new Error(`Failed to load questions.json: ${response.status}`);
@@ -113,6 +152,7 @@ function goToNext() {
 function finishExam() {
   if (examFinished) return;
   examFinished = true;
+  examInProgress = false;
   stopTimer();
 
   let score = 0;
@@ -162,6 +202,7 @@ function finishExam() {
 async function startExam() {
   currentIndex = 0;
   examFinished = false;
+  examInProgress = true;
   try {
     questions = await loadQuestions();
   } catch (err) {
@@ -175,6 +216,7 @@ async function startExam() {
   startTimer();
 }
 
+generateBtn.addEventListener("click", generateQuestions);
 startBtn.addEventListener("click", startExam);
 nextBtn.addEventListener("click", goToNext);
 restartBtn.addEventListener("click", startExam);
