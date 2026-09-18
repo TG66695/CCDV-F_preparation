@@ -10,6 +10,7 @@ const resultScreen = document.getElementById("result-screen");
 
 const startBtn = document.getElementById("start-btn");
 const nextBtn = document.getElementById("next-btn");
+const finishBtn = document.getElementById("finish-btn");
 const restartBtn = document.getElementById("restart-btn");
 const generateBtn = document.getElementById("generate-btn");
 const generateStatusEl = document.getElementById("generate-status");
@@ -216,7 +217,21 @@ async function startExam() {
   startTimer();
 }
 
+function confirmFinishExam() {
+  const unansweredCount = userAnswers.filter(
+    (answer) => answer === null || answer === undefined
+  ).length;
+  if (unansweredCount > 0) {
+    const message = `You have ${unansweredCount} unanswered question(s). They will be marked as failed. Finish exam now?`;
+    if (!window.confirm(message)) {
+      return;
+    }
+  }
+  finishExam();
+}
+
 generateBtn.addEventListener("click", generateQuestions);
 startBtn.addEventListener("click", startExam);
 nextBtn.addEventListener("click", goToNext);
+finishBtn.addEventListener("click", confirmFinishExam);
 restartBtn.addEventListener("click", startExam);

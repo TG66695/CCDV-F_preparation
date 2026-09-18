@@ -126,6 +126,12 @@ body {
   margin-top: 24px;
 }
 
+.nav-buttons {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
 .feedback {
   font-size: 14px;
   font-weight: 600;

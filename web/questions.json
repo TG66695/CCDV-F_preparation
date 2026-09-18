@@ -1,267 +1,267 @@
 [
   {
-    "question": "Why should an application use scoped, least-privilege API keys or credentials for a Claude-powered feature rather than broad administrative credentials?",
-    "options": ["To limit the potential damage if the key is leaked or the feature is misused", "Scoped keys always provide faster API responses", "Scoping credentials has no effect on security", "Broad administrative credentials are required for every Claude API call"],
+    "question": "Why is it good practice to configure a client-side request timeout when calling the Claude API from an application?",
+    "options": ["Every request to the API must specify a timeout value to be accepted", "To avoid the application hanging indefinitely if a response takes unusually long or the connection stalls", "A shorter timeout causes the model to generate its response faster", "Configuring a timeout expands the context window available to the request"],
+    "correctIndex": 1
+  },
+  {
+    "question": "Why is being specific and explicit in a prompt generally more effective than a vague instruction?",
+    "options": ["It reduces ambiguity, helping the model produce output that matches the intended goal", "Specific prompts generally consume fewer tokens than vague, open-ended ones", "Being specific removes the possibility of errors on any task, however hard", "Vague or ambiguous prompts are typically rejected before reaching the model"],
     "correctIndex": 0
-  },
-  {
-    "question": "Why should an application validate the arguments in a model-generated tool call before executing the underlying action?",
-    "options": ["Because the model can occasionally produce malformed, incomplete, or unexpected arguments that could cause errors or unsafe behavior if executed blindly", "Validating arguments would violate the Model Context Protocol specification", "Model-generated tool calls are always guaranteed to be perfectly valid", "Validation is only necessary for tools that do not modify any data"],
-    "correctIndex": 0
-  },
-  {
-    "question": "What is an important security consideration before connecting an agent to a third-party MCP server?",
-    "options": ["There is no security difference between local and third-party MCP servers", "All MCP servers are vetted and secured automatically by the protocol itself", "MCP servers cannot access any external systems by design", "Reviewing the trustworthiness and permissions of the server, since it can expose powerful tools and data access to the agent"],
-    "correctIndex": 3
-  },
-  {
-    "question": "In a production application, why is it important to log requests and responses to and from the Claude API (with appropriate privacy safeguards)?",
-    "options": ["To automatically train a custom model", "Logging is unnecessary since the API guarantees correctness", "To increase the token limit of future requests", "To support debugging, monitoring, and auditing of application behavior"],
-    "correctIndex": 3
-  },
-  {
-    "question": "What is a sound resilience practice for a production application if the Claude API becomes temporarily unavailable?",
-    "options": ["Retrying the exact same request in an infinite tight loop", "Silently returning a fabricated success response with no output", "Falling back to a degraded experience, such as a cached response or a simplified feature, rather than failing completely", "Immediately deleting the user's session data"],
-    "correctIndex": 2
   },
   {
     "question": "What is a useful prompting technique to reduce fabricated answers when the required information may not be available in the given context?",
-    "options": ["Explicitly instructing the model to say it does not know or cannot find the answer rather than guessing", "Removing all instructions so the model responds freely", "Shortening the prompt to a single word to force a concise answer", "Increasing the temperature parameter to maximize creativity"],
+    "options": ["Explicitly instructing the model to say it does not know or cannot find the answer rather than guessing", "Raising the temperature so the model explores more creative possibilities", "Leaving out instructions entirely so the model can respond however it likes", "Trimming the prompt down to a single word to force a terse answer"],
     "correctIndex": 0
   },
   {
-    "question": "When a tool call returns an error, what is generally the best way for an agent to handle it?",
-    "options": ["Surface the error back to the model so it can decide how to adapt or retry", "Silently ignore the error and proceed as if it succeeded", "Immediately terminate the entire session with no explanation", "Automatically restart the whole conversation from scratch"],
+    "question": "Why might Claude Code delegate part of a task to a subagent rather than handling everything in the main conversation?",
+    "options": ["Delegating work to a subagent turns off git integration for that task", "To keep a focused task's exploration or tool output isolated, preventing it from cluttering the main conversation's context", "Subagents in Claude Code are limited to read-only access to files", "Each subagent that gets spun up needs its own separate billing account to run"],
+    "correctIndex": 1
+  },
+  {
+    "question": "In a multi-step agent workflow, how is relevant state typically carried from one step to the next?",
+    "options": ["Each step in the workflow is designed to be unaware of earlier steps", "By explicitly passing relevant results or summaries forward as part of the next step's input or context", "Relevant state can only be shared through an external database, not the prompt", "The model retains relevant state on its own without it being passed forward"],
+    "correctIndex": 1
+  },
+  {
+    "question": "What is the purpose of the 'prompts' feature that an MCP server can expose, in addition to tools and resources?",
+    "options": ["To provide reusable, parameterized prompt templates that clients can surface to users or the model", "To store a copy of the underlying model's private weights", "To remove the need for the client to define a system prompt at all", "To take the place of defining any tools for the server to expose"],
     "correctIndex": 0
   },
   {
-    "question": "When a tool call inside an agent loop fails due to a transient error, what is a reasonable design choice?",
-    "options": ["Silently treat the failure as a success and continue", "Permanently disable that tool for all future sessions", "Allow the agent to retry the call, possibly with backoff, or adapt its approach based on the error", "Immediately terminate the entire application"],
+    "question": "What is a relevant consideration when selecting a model for an application that must handle multiple languages well?",
+    "options": ["Treating language support as a minor factor compared to raw model size", "Evaluating the model's multilingual comprehension and generation quality for the specific languages required", "Prioritizing the largest available context window over language quality", "Assuming comprehension and generation quality is roughly the same across languages"],
+    "correctIndex": 1
+  },
+  {
+    "question": "What is the primary purpose of providing few-shot examples in a prompt?",
+    "options": ["To remove the need to include a system prompt alongside them", "To lower the overall number of tokens consumed by the prompt", "To expand the size of the context window available for that request", "To demonstrate the desired input/output pattern so the model can follow it more reliably"],
+    "correctIndex": 3
+  },
+  {
+    "question": "Which Claude API feature allows a response to be delivered incrementally as it is generated, rather than waiting for the full completion?",
+    "options": ["Batch processing", "Streaming responses (server-sent events)", "Prompt caching", "Extended thinking"],
+    "correctIndex": 1
+  },
+  {
+    "question": "In MCP, what is the general distinction between a 'resource' and a 'tool'?",
+    "options": ["Resources are used mainly for billing purposes, while tools handle logging", "A resource typically exposes readable data or context, while a tool exposes an action the model can invoke", "Resources and tools describe essentially the same concept under different names", "Tools mainly expose data for reading, while resources trigger actions"],
+    "correctIndex": 1
+  },
+  {
+    "question": "In an LLM-powered application, what might a unit test focus on that an end-to-end integration test would not?",
+    "options": ["Testing individual components in isolation, such as input validation or response-parsing logic, without calling the live model", "Verifying behavior that can only be checked once the app is fully deployed", "Calling the live production model with real credentials for every test run", "Covering roughly the same ground as an end-to-end integration test would"],
+    "correctIndex": 0
+  },
+  {
+    "question": "Why is content moderation or output filtering relevant to a customer-facing Claude application?",
+    "options": ["It ensures the model's responses will always be completely error-free", "It takes the place of writing a system prompt for the assistant", "To reduce the risk of harmful, inappropriate, or policy-violating content reaching end users", "It mainly matters for internal tooling rather than customer-facing products"],
     "correctIndex": 2
   },
   {
     "question": "What is the benefit of using a 'plan mode' in Claude Code before making changes to a codebase?",
-    "options": ["It skips all testing requirements for the change", "It lets the developer review and approve an intended approach before any code is modified", "It permanently disables the ability to edit any files", "It automatically deploys the changes to production"],
-    "correctIndex": 1
-  },
-  {
-    "question": "What is 'prefilling' the assistant's response used for in prompt engineering?",
-    "options": ["Pre-authorizing the API key before a request can be sent", "Starting the model's response with specific text (e.g., an opening brace) to steer it toward a desired format or continuation", "Caching the entire conversation history permanently", "Automatically filling in the user's next message"],
-    "correctIndex": 1
-  },
-  {
-    "question": "Why is it useful to explicitly specify the desired tone, style, and length in a prompt for a customer-facing response?",
-    "options": ["Specifying length always increases the cost of the request", "The API automatically infers the desired tone from the user's account settings", "It reduces ambiguity and increases the likelihood the output matches brand and format expectations without extra post-processing", "Tone and style cannot be influenced by prompt wording"],
+    "options": ["It turns off file editing for the remainder of the session", "It pushes the proposed changes straight to production automatically", "It lets the developer review and approve an intended approach before any code is modified", "It removes the need to run tests before merging the change"],
     "correctIndex": 2
   },
   {
-    "question": "What is the purpose of defining a tool's parameters using a JSON schema when registering it for model use?",
-    "options": ["To set the tool's pricing tier", "To disable the tool for all but administrator accounts", "To specify the expected structure and types of arguments so the model can generate valid, well-formed tool calls", "To encrypt the tool's implementation code"],
+    "question": "Why might a long-running command be executed as a background task in Claude Code rather than blocking the conversation?",
+    "options": ["Every command is required to run in the background regardless of length", "Background tasks are moved to a separate, unrelated machine to run", "So the developer can continue interacting with Claude Code while the command completes, and be notified when it finishes", "Background tasks have no way to report their outcome back to the session"],
     "correctIndex": 2
   },
   {
-    "question": "In an agentic workflow, why might a task be broken into multiple sequential agent calls rather than one large call?",
-    "options": ["Because a single agent call is not technically possible", "Because the API forbids more than one call per workflow", "To let each step focus on a smaller, more manageable piece of the problem and verify progress along the way", "Because splitting always reduces total token usage to zero"],
-    "correctIndex": 2
-  },
-  {
-    "question": "What is 'indirect prompt injection'?",
-    "options": ["Malicious instructions embedded in external content (such as a webpage, email, or document) that an agent processes and may inadvertently follow", "A technique for speeding up prompt processing", "A standard, officially supported way to configure model behavior", "A direct attack where a user types malicious commands into the chat interface"],
+    "question": "What does MCP stand for in the context of tool integration with Claude?",
+    "options": ["Model Context Protocol", "Multi-Client Processing", "Model Configuration Package", "Managed Cloud Platform"],
     "correctIndex": 0
+  },
+  {
+    "question": "Why might a developer version and pin a specific model identifier in production code rather than always using the latest alias?",
+    "options": ["To ensure consistent, predictable behavior and avoid unexpected changes when a new model version is released", "Pinned model versions typically cost less per token than the latest alias", "Streaming responses are only available when a pinned model version is used", "Requests that reference an alias instead of a pinned version are rejected"],
+    "correctIndex": 0
+  },
+  {
+    "question": "What is the purpose of A/B testing two different prompt versions in a production application?",
+    "options": ["To skip offline evaluation entirely and rely on live traffic alone", "To keep both prompt versions running indefinitely without ever comparing them", "To compare their real-world performance on live traffic before fully committing to one version", "To find out which version requires fewer API keys to operate"],
+    "correctIndex": 2
+  },
+  {
+    "question": "Why is it useful to categorize LLM application failures into a taxonomy such as hallucination, refusal, formatting error, and tool misuse?",
+    "options": ["A single catch-all error category is usually enough for most analysis", "This kind of categorization mainly applies to traditional, non-AI software", "It helps teams identify patterns and prioritize fixes for the most impactful or frequent categories of failure", "Once a specific bug is found, sorting it into a category adds little value"],
+    "correctIndex": 2
+  },
+  {
+    "question": "Why might a prompt include an example of an incorrect or undesired output alongside the correct one?",
+    "options": ["Adding an incorrect example tends to make the model's output less reliable", "It is a common way to work around the content moderation system", "To help the model distinguish the desired behavior from a common mistake it should avoid", "Counter-examples generally have little influence on the model's final output"],
+    "correctIndex": 2
   },
   {
     "question": "What is a good practice when writing test cases for a feature built on top of an LLM?",
-    "options": ["Including edge cases and adversarial inputs, not just the happy path", "Testing exclusively in production with real users", "Skipping tests since LLM output is 'random' and untestable", "Testing only the single most common input"],
+    "options": ["Including edge cases and adversarial inputs, not just the happy path", "Relying mainly on production traffic with real users to catch issues", "Skipping most testing since LLM output varies from run to run", "Focusing tests mainly on the single most common input pattern"],
     "correctIndex": 0
-  },
-  {
-    "question": "What kind of test case is important to include when testing an agent that calls external tools?",
-    "options": ["Only cases where every tool call succeeds perfectly on the first attempt", "Cases that do not involve any tool calls at all, since those are irrelevant", "Only the single most expensive tool available", "Cases where a tool call fails, returns malformed data, or is called with missing or invalid arguments"],
-    "correctIndex": 3
-  },
-  {
-    "question": "What is the 'orchestrator-worker' pattern in agentic workflow design?",
-    "options": ["A lead agent breaks a task into subtasks and delegates them to specialized worker agents, then synthesizes their results", "A pattern where every agent works entirely independently with no coordination", "A method for reducing an agent's context window to zero", "A requirement that only one agent may ever run per application"],
-    "correctIndex": 0
-  },
-  {
-    "question": "Why is it useful to log an agent's intermediate reasoning and tool calls (its 'trace') during development?",
-    "options": ["Traces are only useful for billing purposes", "It allows developers to understand why the agent made a particular decision and diagnose unexpected behavior", "Logging traces prevents the agent from ever making mistakes", "Traces replace the need for any evaluation metrics"],
-    "correctIndex": 1
   },
   {
     "question": "Why might a developer configure an MCP server within Claude Code?",
-    "options": ["To reduce the number of files in the project", "To disable all tool use entirely", "To replace the need for a code editor", "To give the assistant access to additional external tools or data sources beyond its built-in capabilities"],
-    "correctIndex": 3
-  },
-  {
-    "question": "Why should sensitive data, such as credentials, generally be kept out of prompts sent to an LLM?",
-    "options": ["Because it would exceed the context window automatically", "Because sensitive data always breaks JSON formatting", "To reduce the risk of exposure through logs, model outputs, or unintended context leakage", "Because the API cannot technically process sensitive data"],
+    "options": ["To reduce the number of files tracked within the project", "To turn off the assistant's built-in tool-use capabilities", "To give the assistant access to additional external tools or data sources beyond its built-in capabilities", "To remove the need to use a separate code editor"],
     "correctIndex": 2
   },
   {
-    "question": "What does configuring an MCP server in Claude Code allow the assistant to do?",
-    "options": ["Disable all built-in tools permanently", "Change the underlying model powering Claude Code", "Access additional external tools, services, or data sources beyond its built-in file and shell capabilities", "Bypass the need for user permission on any action"],
-    "correctIndex": 2
+    "question": "Extended thinking (showing the model's step-by-step reasoning before a final answer) is generally most useful for which type of task?",
+    "options": ["Tasks that need to stay within a very small token budget", "Complex, multi-step reasoning or analysis tasks", "Tasks where minimizing latency matters more than deep reasoning", "Simple lookups that need little more than a direct answer"],
+    "correctIndex": 1
   },
   {
-    "question": "What does 'context window' refer to when discussing model capability?",
-    "options": ["The number of API keys a project can have", "The number of users who can call the API simultaneously", "The maximum amount of text (in tokens) the model can consider at once, including input and output", "The visual window size of the developer's screen"],
-    "correctIndex": 2
-  },
-  {
-    "question": "What is the 'evaluator-optimizer' agentic pattern?",
-    "options": ["A requirement that all agents share the exact same prompt", "A pattern where a single agent both writes and grades its own homework with no independent check", "One agent generates a candidate output while a second agent critiques it, and the process repeats until the output meets quality criteria", "A billing feature that reduces API cost automatically"],
-    "correctIndex": 2
-  },
-  {
-    "question": "How can prompt caching and the Batch API be combined to further optimize cost for large-scale, non-urgent workloads?",
-    "options": ["By reusing cached portions of a shared prompt prefix across many batched requests that share common context", "Combining them always doubles the cost of each request", "They cannot be used together under any circumstances", "Batch processing automatically disables prompt caching"],
+    "question": "When should a developer prefer a fixed, deterministic workflow over a fully autonomous agent?",
+    "options": ["When the steps and decision points of the task are well understood and predictable in advance", "Mainly when the task is simple enough to need no error handling", "Rarely, since fixed workflows generally can't be given access to tools", "In most cases, since autonomous agents rarely add value over fixed steps"],
     "correctIndex": 0
   },
   {
-    "question": "In a multimodal application, why might a request combine image input with tool use in the same conversation?",
-    "options": ["Because it is required for the API to accept any image at all", "So the model can visually interpret an image and then take a structured action based on what it observed, such as looking up related data", "Because image input and tool use cannot be combined in a single request", "Because combining them disables the system prompt"],
-    "correctIndex": 1
-  },
-  {
     "question": "Why is it generally better to give an agent a small number of clearly distinct tools rather than many overlapping ones?",
-    "options": ["Tool count has no effect on an agent's tool-selection behavior", "More tools always improve an agent's accuracy regardless of overlap", "Agents can only ever be given exactly one tool", "Overlapping tools with similar purposes make it harder for the model to reliably choose the correct one"],
-    "correctIndex": 3
-  },
-  {
-    "question": "Why is it good practice to review the diff of changes Claude Code proposes before accepting them?",
-    "options": ["Diffs are purely decorative and do not reflect real file changes", "Reviewing diffs is unnecessary since automated changes are always correct", "To catch unintended changes, bugs, or behavior the developer did not intend, since human oversight remains important", "Diffs cannot be generated for AI-proposed changes"],
-    "correctIndex": 2
-  },
-  {
-    "question": "What is the purpose of permission modes in Claude Code, such as requiring approval before running certain commands?",
-    "options": ["To determine which programming languages the tool can read", "To control the model's temperature parameter", "To set the visual theme of the terminal interface", "To let the user control which actions Claude Code can take autonomously versus which require explicit confirmation"],
-    "correctIndex": 3
-  },
-  {
-    "question": "What are 'hooks' in the context of Claude Code?",
-    "options": ["A type of AI model used only for code completion", "A billing feature for tracking API usage", "Built-in keyboard shortcuts with no configuration options", "User-configured shell commands that execute automatically in response to specific events, such as before or after a tool call"],
-    "correctIndex": 3
-  },
-  {
-    "question": "What typically happens as a Claude Code session grows very long and approaches the context window limit?",
-    "options": ["All previously edited files are automatically reverted", "Earlier parts of the conversation may be summarized or compacted so the session can continue without losing essential context", "The context window automatically doubles in size at no cost", "The session immediately and permanently terminates with all history lost"],
+    "options": ["Most agent frameworks cap the number of tools an agent can be given", "Overlapping tools with similar purposes make it harder for the model to reliably choose the correct one", "The number of available tools rarely influences how well an agent picks between them", "Adding more tools tends to improve accuracy even when their purposes overlap"],
     "correctIndex": 1
   },
   {
-    "question": "What is the main advantage of using the Files API to upload a document once and reference it by ID in multiple requests?",
-    "options": ["It automatically translates the document into other languages", "It permanently fine-tunes the model on that document", "It avoids re-uploading and re-processing the same content on every request, saving bandwidth and often cost", "It guarantees the document will never be included in the context window"],
+    "question": "Why might a workflow run multiple independent agents in parallel rather than sequentially?",
+    "options": ["To reduce overall wall-clock time when the subtasks do not depend on each other's results", "Agents running in parallel are generally unable to call external tools", "Parallel execution mainly increases total cost without a clear speed benefit", "Most agent frameworks only support running steps one after another"],
+    "correctIndex": 0
+  },
+  {
+    "question": "What is a trade-off of prompting a model to reason step-by-step (chain-of-thought) before answering?",
+    "options": ["It prevents the model from making tool calls during that turn", "It tends to have little measurable effect on the model's accuracy", "It generally lowers both the cost and the latency of a response", "It can improve accuracy on complex tasks but increases token usage and response latency"],
+    "correctIndex": 3
+  },
+  {
+    "question": "Why should a developer re-run an evaluation suite after modifying a production prompt?",
+    "options": ["Eval suites are mainly useful once, before the initial prompt is finalized", "Small wording changes to a prompt rarely have a measurable effect on behavior", "To check for regressions, ensuring the change did not degrade performance on previously working cases", "Re-running an eval suite after each change is discouraged as wasteful"],
     "correctIndex": 2
   },
   {
-    "question": "Why is it valuable to benchmark candidate models on your own task-specific evaluation set rather than relying solely on public benchmark leaderboards?",
-    "options": ["Public benchmarks are always inaccurate and should never be considered", "Public benchmarks may not reflect how a model performs on your application's specific data and requirements", "Task-specific benchmarking is required by the API before any request can be made", "Public benchmark scores automatically update your application's behavior"],
-    "correctIndex": 1
+    "question": "Why is it particularly risky to give an agent both access to sensitive internal data and the ability to make outbound network requests?",
+    "options": ["Most agent frameworks prevent an agent from having both kinds of access at once", "A well-written system prompt is generally enough to remove that risk", "A compromised or manipulated agent could be tricked into leaking sensitive data to an external destination", "Outbound network requests are typically blocked by default for any agent"],
+    "correctIndex": 2
   },
   {
     "question": "What is a common failure mode to guard against when building autonomous agent loops?",
-    "options": ["The agent using too few tools", "The agent's context window being too large", "The agent looping indefinitely or repeating the same failing action without making progress", "The agent completing the task too quickly"],
+    "options": ["The agent's context window growing larger than the task actually needs", "The agent looping indefinitely or repeating the same failing action without making progress", "The agent relying on only one or two tools for the whole task", "The agent finishing the task earlier than expected with fewer steps"],
+    "correctIndex": 1
+  },
+  {
+    "question": "When a tool call inside an agent loop fails due to a transient error, what is a reasonable design choice?",
+    "options": ["Shut down the application rather than let the agent continue", "Turn off that tool for the remainder of every future session", "Treat the failed call as though it had succeeded and move on", "Allow the agent to retry the call, possibly with backoff, or adapt its approach based on the error"],
+    "correctIndex": 3
+  },
+  {
+    "question": "In an agentic workflow, why might a task be broken into multiple sequential agent calls rather than one large call?",
+    "options": ["Because splitting the task generally lowers the total tokens used overall", "Because a single large agent call tends to exceed most rate limits", "To let each step focus on a smaller, more manageable piece of the problem and verify progress along the way", "Because most agent frameworks limit a workflow to one call each"],
     "correctIndex": 2
   },
   {
-    "question": "What is a safe way to roll out a significant change to a production prompt or system prompt?",
-    "options": ["Changing the prompt directly in the model's weights", "Gradually rolling it out to a subset of traffic while monitoring quality metrics before a full rollout", "Deploying it to 100% of production traffic immediately with no monitoring", "Skipping evaluation since prompt changes cannot affect behavior"],
+    "question": "What is a common way to restrict a customer-facing assistant from discussing off-topic or disallowed subjects?",
+    "options": ["Including explicit guardrail instructions in the system prompt, combined with output monitoring", "This kind of restriction is implemented at the hardware level, not in software", "Retraining the underlying model is the only way to add this kind of guardrail", "A deployed assistant's allowed topics generally can't be constrained after launch"],
+    "correctIndex": 0
+  },
+  {
+    "question": "What is 'prompt injection' in the context of LLM application security?",
+    "options": ["An attempt to manipulate a model's behavior by embedding malicious instructions in content it processes, such as a document or webpage", "A technique for speeding up how quickly a long prompt is processed", "A method used purely for shrinking prompts so they consume noticeably fewer tokens overall", "A supported way for developers to customize the tone and style of the assistant's responses"],
+    "correctIndex": 0
+  },
+  {
+    "question": "What does 'context window' refer to when discussing model capability?",
+    "options": ["The size of the display area used to render the chat interface", "The maximum number of concurrent users a project's API plan allows", "The maximum amount of text (in tokens) the model can consider at once, including input and output", "The maximum number of API keys that can be issued to a project"],
+    "correctIndex": 2
+  },
+  {
+    "question": "What is the purpose of a custom 'skill' in Claude Code?",
+    "options": ["To remove the need for any project-specific configuration files", "To install a low-level module into the operating system's kernel", "To package a reusable set of instructions or workflow for a recurring type of task so it can be invoked consistently", "To modify the underlying model's training data going forward"],
+    "correctIndex": 2
+  },
+  {
+    "question": "Why might a developer choose to use tool use (function calling) in a Claude application?",
+    "options": ["To restrict the assistant's responses to plain text with no other formatting", "To let the model request structured actions, such as calling an external API, in a predictable format", "To remove the need for a system prompt when defining the assistant's behavior", "To reduce the number of parameters the underlying model needs to store"],
     "correctIndex": 1
   },
   {
     "question": "Why should an autonomous agent loop have explicit termination conditions, such as a maximum number of steps?",
-    "options": ["Termination conditions are only relevant for agents that never call tools", "Explicit termination conditions always cause the agent to fail immediately", "Agents cannot be configured with any step limits", "To prevent the agent from running indefinitely or looping on a task it cannot complete, controlling cost and risk"],
-    "correctIndex": 3
-  },
-  {
-    "question": "What is the core loop that an agent built with a tool-use capable model typically follows?",
-    "options": ["The model always produces a final answer immediately without calling any tools", "The model requires a human to manually approve every internal reasoning step", "The model can only call one tool per entire session", "The model decides whether to call a tool, executes it, observes the result, and repeats until it can produce a final answer"],
-    "correctIndex": 3
-  },
-  {
-    "question": "What is 'role prompting' in the context of prompt engineering?",
-    "options": ["Assigning the model a specific persona or role (e.g., 'You are an experienced security auditor') to shape its tone and focus", "A way to bypass the context window limit", "A method for authenticating API requests", "Restricting the model to only one API endpoint"],
-    "correctIndex": 0
-  },
-  {
-    "question": "In a multi-step agent workflow, how is relevant state typically carried from one step to the next?",
-    "options": ["By explicitly passing relevant results or summaries forward as part of the next step's input or context", "State can only be passed through a shared database, never through prompts", "Each step must be entirely unaware of all previous steps by design", "State is automatically remembered by the model with no need to pass anything"],
-    "correctIndex": 0
-  },
-  {
-    "question": "Why is it useful to use an LLM as a judge in an evaluation pipeline?",
-    "options": ["To automatically score open-ended or subjective outputs at scale where exact-match grading is not practical", "It removes the need for any evaluation criteria", "It guarantees perfectly objective scoring with no possibility of error", "It only works for numeric outputs"],
-    "correctIndex": 0
-  },
-  {
-    "question": "Why might a workflow run multiple independent agents in parallel rather than sequentially?",
-    "options": ["Parallel execution always increases the total cost with no benefit", "To reduce overall wall-clock time when the subtasks do not depend on each other's results", "Parallel agents cannot access tools", "Sequential execution is not supported by any agent framework"],
-    "correctIndex": 1
-  },
-  {
-    "question": "What is a key benefit of using subagents in a multi-agent workflow?",
-    "options": ["Isolating a focused task's context and tool output from the main conversation to keep it manageable", "Subagents always run with no context at all", "Subagents replace the need for any tools", "Subagents guarantee zero cost for the task"],
-    "correctIndex": 0
-  },
-  {
-    "question": "Why is it important to maintain an audit log of actions an autonomous agent takes in a production system?",
-    "options": ["To provide accountability and a way to trace back what the agent did if something goes wrong", "Logging agent actions is prohibited for AI systems", "Audit logs are only useful for marketing purposes", "Audit logs eliminate the need for any other safeguard"],
-    "correctIndex": 0
-  },
-  {
-    "question": "What is the primary purpose of Claude Code as a developer tool?",
-    "options": ["To only generate documentation, never code", "To act as an agentic command-line coding assistant that can read, write, and execute code in a project", "To serve exclusively as a chat interface with no access to local files", "To replace version control systems entirely"],
-    "correctIndex": 1
-  },
-  {
-    "question": "What problem can arise from registering multiple tools with very similar names and unclear descriptions?",
-    "options": ["Overlapping tool names always improve the model's accuracy", "The API automatically merges similarly named tools into one", "The model may struggle to choose the correct tool, leading to incorrect or inconsistent tool calls", "This situation is not technically possible to create"],
-    "correctIndex": 2
-  },
-  {
-    "question": "What is the primary benefit of using the Batch API for large volumes of non-urgent requests?",
-    "options": ["Unlimited context window size", "Automatic fine-tuning of the model", "Guaranteed lower latency than standard requests", "Significantly reduced cost per request in exchange for asynchronous, delayed processing"],
-    "correctIndex": 3
-  },
-  {
-    "question": "When debugging an agent that repeatedly calls the wrong tool, what is a useful first step?",
-    "options": ["Increasing the model's temperature to add randomness", "Reviewing the tool descriptions and the agent's reasoning trace to see why it chose that tool", "Immediately removing all tools from the agent", "Ignoring the issue since agents cannot be debugged"],
-    "correctIndex": 1
-  },
-  {
-    "question": "What is 'prompt injection' in the context of LLM application security?",
-    "options": ["A technique for increasing the speed of prompt processing", "A method for compressing prompts to save tokens", "A standard feature for customizing model responses", "An attempt to manipulate a model's behavior by embedding malicious instructions in content it processes, such as a document or webpage"],
-    "correctIndex": 3
-  },
-  {
-    "question": "Why is it important to version a tool's schema as it evolves over time?",
-    "options": ["Versioning tool schemas is unrelated to backward compatibility", "To avoid breaking existing integrations or agents that rely on the previous schema when parameters change", "Only the model's version needs to be tracked, never the tool's", "Tool schemas never need to change once defined"],
-    "correctIndex": 1
-  },
-  {
-    "question": "What is a key consideration when selecting a model for a latency-sensitive, real-time user-facing feature?",
-    "options": ["Disabling error handling to save time", "Increasing the context window as much as possible", "Preferring a faster model or streaming responses to minimize perceived wait time", "Always choosing the largest available model regardless of speed"],
-    "correctIndex": 2
-  },
-  {
-    "question": "In a very long prompt, why does the placement of critical instructions (e.g., near the beginning or end) matter?",
-    "options": ["Placement has no effect since the model processes all tokens with perfectly equal attention regardless of position", "Instructions placed in the middle are always weighted more heavily", "Models can attend unevenly across a very long context, so placing key instructions prominently reduces the risk they are overlooked", "The API automatically reorders the prompt for optimal placement"],
-    "correctIndex": 2
-  },
-  {
-    "question": "What is the purpose of a citations feature when Claude answers questions based on provided source documents?",
-    "options": ["To encrypt the source documents for security", "To automatically summarize the entire document regardless of the question", "To ground the response in specific passages of the source material and let users verify claims against the original text", "To remove the need for including the source documents in the prompt"],
+    "options": ["Setting an explicit step limit tends to cause the agent to fail right away", "Most agent frameworks don't provide a way to cap the number of steps", "To prevent the agent from running indefinitely or looping on a task it cannot complete, controlling cost and risk", "Termination conditions mostly matter for agents that don't use any tools"],
     "correctIndex": 2
   },
   {
     "question": "After submitting a large job to the Batch API, how does an application typically retrieve the results?",
-    "options": ["By polling the batch status endpoint (or being notified) until processing completes, then fetching the results", "Batch results are only available via a phone call to support", "Results are streamed back token-by-token in real time like a standard request", "The application must resubmit the same batch repeatedly until it succeeds"],
+    "options": ["The application resubmits the batch repeatedly until the job is accepted", "Results stream back token by token in real time as they're generated", "Results must be requested from support rather than through the API", "By polling the batch status endpoint (or being notified) until processing completes, then fetching the results"],
+    "correctIndex": 3
+  },
+  {
+    "question": "What is the primary purpose of Claude Code as a developer tool?",
+    "options": ["To generate project documentation without writing or running any code", "To provide a chat interface for discussing code without touching local files", "To act as an agentic command-line coding assistant that can read, write, and execute code in a project", "To serve as a replacement for the project's version control system"],
+    "correctIndex": 2
+  },
+  {
+    "question": "What is a benefit of running continuous evaluation or monitoring on a live LLM feature, rather than evaluating only before launch?",
+    "options": ["It can catch quality degradation caused by model updates, data drift, or edge cases not seen during initial testing", "It removes the need to run any evaluation before the feature launches", "It mostly duplicates work already done during the initial pre-launch testing", "It retrains the underlying model automatically as new data comes in"],
     "correctIndex": 0
   },
   {
-    "question": "Why is it important to keep a held-out set of test examples separate from the examples used to iteratively refine a prompt?",
-    "options": ["A held-out set is required by the API before any request can be sent", "Using the same examples for both development and evaluation always gives a more accurate result", "To avoid overfitting the prompt to the specific examples seen during development, giving a more honest estimate of real-world performance", "Held-out sets are only relevant when fine-tuning a model's weights"],
+    "question": "Why is it useful to explicitly specify the desired tone, style, and length in a prompt for a customer-facing response?",
+    "options": ["It reduces ambiguity and increases the likelihood the output matches brand and format expectations without extra post-processing", "Tone and style are largely fixed traits of the model that wording can't shift", "Specifying a target length generally raises the overall cost of the request", "The desired tone is inferred automatically from the account's settings"],
+    "correctIndex": 0
+  },
+  {
+    "question": "What is a reasonable safeguard when allowing an agent to execute shell commands or modify files autonomously?",
+    "options": ["Requiring confirmation or restricting permissions for destructive or irreversible actions", "Letting commands run without review, since agent output is usually reliable", "Removing the option to pause or interrupt the agent mid-task", "Turning off action logging to reduce overhead during long sessions"],
+    "correctIndex": 0
+  },
+  {
+    "question": "In a very long prompt, why does the placement of critical instructions (e.g., near the beginning or end) matter?",
+    "options": ["The model attends to every part of a long prompt with roughly equal weight", "Models can attend unevenly across a very long context, so placing key instructions prominently reduces the risk they are overlooked", "Instructions placed in the middle of a long prompt tend to carry more weight", "The API silently reorders the prompt's contents to place instructions in an optimal spot"],
+    "correctIndex": 1
+  },
+  {
+    "question": "Why is it useful to log an agent's intermediate reasoning and tool calls (its 'trace') during development?",
+    "options": ["It allows developers to understand why the agent made a particular decision and diagnose unexpected behavior", "Recording a trace tends to stop the agent from repeating its mistakes", "Detailed traces remove the need to track any evaluation metrics", "Traces are mainly collected for billing and usage-tracking purposes"],
+    "correctIndex": 0
+  },
+  {
+    "question": "Why is it generally more effective to tell a model what to do rather than only what not to do?",
+    "options": ["Positive instructions give the model a clear target behavior, whereas purely negative instructions can leave the desired behavior ambiguous", "Prompts containing negative instructions are flagged and rejected by the API", "Positive instructions are generally more token-efficient to write than negative ones are", "The model tends to largely ignore instructions that are phrased in the negative form"],
+    "correctIndex": 0
+  },
+  {
+    "question": "What is 'model cascading' (or routing), where a cheap/fast model handles a request first and escalates to a larger model only when needed?",
+    "options": ["A workflow step that the API enforces on every single request that happens to use tools", "A technique for combining two separate models into one merged set of weights", "A cost-optimization pattern that uses a smaller model as a first pass and falls back to a more capable model only for harder cases", "A way to work around per-model rate limits by switching between models mid-conversation"],
+    "correctIndex": 2
+  },
+  {
+    "question": "How does requesting a longer maximum response length typically affect cost, even if the model does not use all of it?",
+    "options": ["Cost is based on tokens actually generated, so a higher max_tokens limit alone does not increase cost unless more tokens are produced", "Cost is charged based on the max_tokens value set, not the actual output length", "The max_tokens setting has essentially no bearing on the request's cost under any configuration", "Raising the max_tokens limit tends to lower the price charged for the request's input tokens"],
+    "correctIndex": 0
+  },
+  {
+    "question": "Why is it important to version a tool's schema as it evolves over time?",
+    "options": ["A tool's schema is generally fixed permanently once it's first published", "It's enough to track the model's version without tracking the tool's", "To avoid breaking existing integrations or agents that rely on the previous schema when parameters change", "Tracking schema versions has little to do with backward compatibility"],
+    "correctIndex": 2
+  },
+  {
+    "question": "Why is it important to maintain an audit log of actions an autonomous agent takes in a production system?",
+    "options": ["Recording an agent's actions this way is generally discouraged for AI systems", "To provide accountability and a way to trace back what the agent did if something goes wrong", "Keeping an audit log removes the need for any other kind of safeguard", "Audit logs are mainly compiled for marketing and reporting purposes"],
+    "correctIndex": 1
+  },
+  {
+    "question": "Why should a customer-facing AI feature implement its own rate limiting or abuse detection in addition to the API's own limits?",
+    "options": ["Abuse detection is mainly a concern for traditional, non-AI features", "To prevent a small number of users from overwhelming the feature or driving excessive cost through abusive usage patterns", "Adding rate limiting tends to reduce the quality of the responses returned", "The API's own rate limits are generally sufficient without extra controls"],
+    "correctIndex": 1
+  },
+  {
+    "question": "What is the purpose of a system prompt when designing a Claude-powered application?",
+    "options": ["To specify the network endpoint the application sends its requests to", "To set persistent instructions, role, and constraints that apply across the conversation", "To store the credentials the client uses to authenticate each request", "To cache the model's previous responses so they can be reused later"],
+    "correctIndex": 1
+  },
+  {
+    "question": "When an LLM feature produces an unexpected output, what is a sound debugging sequence to follow?",
+    "options": ["Check the exact prompt and inputs sent, verify any tool outputs used, and confirm the model version, before assuming the model itself is at fault", "Treat the output as correct and adjust the UI so the underlying issue isn't visible to users", "Clear out the relevant logs so the same issue doesn't keep reappearing later", "Assume the model itself is the problem and switch to a different provider"],
+    "correctIndex": 0
+  },
+  {
+    "question": "What is the primary benefit of using the Batch API for large volumes of non-urgent requests?",
+    "options": ["Faster response times than standard requests, since batch jobs skip the normal request queue", "A larger context window than standard requests, allowing longer documents to be included", "Significantly reduced cost per request in exchange for asynchronous, delayed processing", "Fine-tuning of the model on the submitted requests to improve future accuracy"],
     "correctIndex": 2
   }
 ]
